@@ -1,0 +1,22 @@
+[
+  { "it": "Ciao",              "en": "Hello / Bye",          "hint": "informal greeting" },
+  { "it": "Buongiorno",        "en": "Good morning",         "hint": "formal, before noon" },
+  { "it": "Buonasera",         "en": "Good evening" },
+  { "it": "Per favore",        "en": "Please" },
+  { "it": "Grazie",            "en": "Thank you" },
+  { "it": "Prego",             "en": "You're welcome" },
+  { "it": "Scusa",             "en": "Sorry / Excuse me",    "hint": "informal" },
+  { "it": "Sì",                "en": "Yes" },
+  { "it": "No",                "en": "No" },
+  { "it": "Come stai?",        "en": "How are you?",         "hint": "informal" },
+  { "it": "Sto bene",          "en": "I'm well" },
+  { "it": "Mi chiamo…",        "en": "My name is…" },
+  { "it": "Parli inglese?",    "en": "Do you speak English?" },
+  { "it": "Non capisco",       "en": "I don't understand" },
+  { "it": "Dov'è il bagno?",   "en": "Where is the bathroom?" },
+  { "it": "Quanto costa?",     "en": "How much does it cost?" },
+  { "it": "Un caffè, per favore", "en": "A coffee, please" },
+  { "it": "Il conto, per favore", "en": "The bill, please" },
+  { "it": "Buon appetito",     "en": "Enjoy your meal" },
+  { "it": "A domani",          "en": "See you tomorrow" }
+]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#1a1a2e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Italian" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Italian Flash Cards</title>
+</head>
+<body>
+  <main id="app">
+    <header>
+      <span id="counter">0 / 0</span>
+      <button id="shuffle" aria-label="Shuffle deck">Shuffle</button>
+      <button id="reset" aria-label="Reset order">Reset</button>
+    </header>
+
+    <div id="card" class="card" role="button" tabindex="0" aria-label="Tap to reveal translation">
+      <div class="face front">
+        <div class="hint" id="hint"></div>
+        <div class="term" id="term">Loading…</div>
+        <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
+      </div>
+      <div class="face back">
+        <div class="term" id="translation"></div>
+      </div>
+    </div>
+
+    <nav>
+      <button id="prev" aria-label="Previous">‹</button>
+      <button id="flip" aria-label="Flip">Reveal</button>
+      <button id="next" aria-label="Next">›</button>
+    </nav>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
