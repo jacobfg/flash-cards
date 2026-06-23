@@ -14,23 +14,42 @@
 </head>
 <body>
   <main id="app">
-    <header>
-      <span id="counter">0 / 0</span>
-      <button id="shuffle" aria-label="Shuffle deck">Shuffle</button>
-      <button id="reset" aria-label="Reset order">Reset</button>
-    </header>
+    <section id="home" class="home">
+      <h1>Italian flash cards</h1>
+      <p class="sub">Pick a direction</p>
+      <button class="mode" data-mode="it">
+        <span class="mode-flag">🇮🇹</span>
+        <span class="mode-label">Italian → English</span>
+        <span class="mode-sub">See Italian, reveal meaning</span>
+      </button>
+      <button class="mode" data-mode="en">
+        <span class="mode-flag">🇬🇧</span>
+        <span class="mode-label">English → Italian</span>
+        <span class="mode-sub">See English, reveal translation</span>
+      </button>
+    </section>
 
-    <div id="card" class="card" role="button" tabindex="0" aria-label="Tap to reveal translation">
-      <div class="face front">
-        <div class="hint" id="hint"></div>
-        <div class="term" id="term">Loading…</div>
-        <div class="pron" id="pron"></div>
-        <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
+    <section id="deck" class="deck" hidden>
+      <header>
+        <button id="home-btn" aria-label="Back to menu">←</button>
+        <span id="counter">0 / 0</span>
+        <span class="spacer"></span>
+      </header>
+
+      <div id="card" class="card" role="button" tabindex="0" aria-label="Tap to reveal translation">
+        <div class="face front">
+          <div class="hint" id="hint"></div>
+          <div class="term" id="term">Loading…</div>
+          <div class="pron" id="pron"></div>
+          <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
+        </div>
+        <div class="face back">
+          <div class="term" id="translation"></div>
+          <div class="pron" id="pron-back"></div>
+          <button class="speak" id="speak-back" aria-label="Speak Italian">🔊</button>
+        </div>
       </div>
-      <div class="face back">
-        <div class="term" id="translation"></div>
-      </div>
-    </div>
+    </section>
   </main>
   <script src="app.js"></script>
 </body>
