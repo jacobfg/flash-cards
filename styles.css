@@ -209,7 +209,7 @@ body.revealed {
   font-style: italic;
 }
 
-.pron, .face .sub {
+.face .sub {
   margin-top: 12px;
   font-size: clamp(16px, 4vw, 22px);
   color: var(--muted);
@@ -238,13 +238,3 @@ body.revealed {
 }
 
 .speak:active { transform: scale(0.95); }
-
-.card.swipe-left  { animation: swipeLeft 0.3s ease forwards; }
-.card.swipe-right { animation: swipeRight 0.3s ease forwards; }
-
-@keyframes swipeLeft {
-  to { transform: translateX(-100%); opacity: 0; }
-}
-@keyframes swipeRight {
-  to { transform: translateX(100%); opacity: 0; }
-}
