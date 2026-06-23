@@ -163,7 +163,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 24px calc(24px + var(--safe-bottom));
+  padding: 24px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -207,7 +207,7 @@ body {
 
 .speak {
   position: absolute;
-  bottom: calc(12px + var(--safe-bottom));
+  bottom: max(12px, var(--safe-bottom));
   right: 12px;
   width: 44px;
   height: 44px;

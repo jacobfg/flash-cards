@@ -1,5 +1,5 @@
-const CACHE = 'flashcards-v3';
-const ASSETS = [
+const CACHE = 'flashcards-v4';
+const APP_SHELL = [
   './',
   'index.html',
   'styles.css',
@@ -10,9 +10,22 @@ const ASSETS = [
   'icon-512.png',
 ];
 
+// On install, fetch cards.json and pre-cache every MP3 the deck references
+// so the app keeps working offline even for words the user hasn't played.
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)));
-  self.skipWaiting();
+  e.waitUntil((async () => {
+    const cache = await caches.open(CACHE);
+    await cache.addAll(APP_SHELL);
+    try {
+      const res = await fetch('cards.json', { cache: 'no-cache' });
+      const cards = await res.json();
+      const audio = [...new Set(cards.map((c) => c.audio).filter(Boolean))];
+      await cache.addAll(audio);
+    } catch (_) {
+      // Audio pre-cache is best-effort — runtime fetches will fill it in.
+    }
+    self.skipWaiting();
+  })());
 });
 
 self.addEventListener('activate', (e) => {
@@ -24,8 +37,7 @@ self.addEventListener('activate', (e) => {
   self.clients.claim();
 });
 
-// Network-first: always try the network, fall back to cache when offline.
-// Keeps offline use working while ensuring updates show up on the next load.
+// Network-first: try the network, fall back to cache when offline.
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   e.respondWith(
