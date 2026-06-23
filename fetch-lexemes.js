@@ -123,16 +123,6 @@ async function main() {
     const avatarURL = `${base}/xxlarge`;
     fs.writeFileSync('user.json', JSON.stringify({ avatarURL }) + '\n');
     console.log(`Avatar: ${avatarURL}`);
-
-    // Bake the avatar URL into the manifest so the homescreen icon comes
-    // straight from Duolingo's CDN — no icon files to commit.
-    const manifestPath = 'manifest.webmanifest';
-    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-    manifest.icons = [
-      { src: avatarURL, sizes: '192x192 512x512 1000x1000', type: 'image/png' },
-    ];
-    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-    console.log(`Updated ${manifestPath} with avatar URL`);
   }
 }
 

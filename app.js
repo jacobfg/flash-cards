@@ -219,8 +219,6 @@ async function load() {
   if (avatarURL) {
     const img = document.getElementById('avatar');
     if (img) img.src = avatarURL;
-    const appleIcon = document.getElementById('apple-icon');
-    if (appleIcon) appleIcon.href = avatarURL;
   }
 }
 

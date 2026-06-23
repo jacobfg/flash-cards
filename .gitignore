@@ -8,6 +8,5 @@ node_modules/
 audio/
 avatar.png
 user.json
-icon-*.png
 # Intermediate fetch output — cards.json is the artifact we actually ship
 learned-lexemes.json

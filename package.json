@@ -4,6 +4,7 @@
   "scripts": {
     "fetch": "node --env-file=.env fetch-lexemes.js",
     "generate": "node generate.js",
+    "icons": "node build-icons.js",
     "update": "npm run fetch && npm run generate"
   },
   "dependencies": {}
