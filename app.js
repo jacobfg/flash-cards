@@ -14,12 +14,19 @@ const el = {
   term: document.getElementById('term'),
   translation: document.getElementById('translation'),
   hint: document.getElementById('hint'),
-  pron: document.getElementById('pron'),
-  pronBack: document.getElementById('pron-back'),
+  sub: document.getElementById('sub'),
+  subBack: document.getElementById('sub-back'),
   counter: document.getElementById('counter'),
   speak: document.getElementById('speak'),
   speakBack: document.getElementById('speak-back'),
 };
+
+// English translations come comma-joined; first one is the headline,
+// the rest sit on a sub line.
+function splitEn(en) {
+  const parts = (en || '').split(',').map((s) => s.trim()).filter(Boolean);
+  return { first: parts[0] || '', rest: parts.slice(1).join(', ') };
+}
 
 function currentCard() {
   return state.cards[state.order[state.index]];
@@ -30,17 +37,19 @@ function render() {
   if (!card) return;
 
   // Front always shows the language the user chose; back shows the other side.
-  // Italian side carries the pronunciation regardless of which side it's on.
+  // The Italian side carries the pronunciation; the English side carries any
+  // alternate translations.
+  const en = splitEn(card.en);
   if (state.mode === 'it') {
     el.term.textContent = card.it;
-    el.pron.textContent = card.pron || '';
-    el.translation.textContent = card.en;
-    el.pronBack.textContent = '';
+    el.sub.textContent = card.pron || '';
+    el.translation.textContent = en.first;
+    el.subBack.textContent = en.rest;
   } else {
-    el.term.textContent = card.en;
-    el.pron.textContent = '';
+    el.term.textContent = en.first;
+    el.sub.textContent = en.rest;
     el.translation.textContent = card.it;
-    el.pronBack.textContent = card.pron || '';
+    el.subBack.textContent = card.pron || '';
   }
   el.hint.textContent = card.hint || '';
   el.counter.textContent = `${state.index + 1} / ${state.order.length}`;

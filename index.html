@@ -30,22 +30,21 @@
     </section>
 
     <section id="deck" class="deck" hidden>
-      <header>
-        <button id="home-btn" aria-label="Back to menu">←</button>
-        <span id="counter">0 / 0</span>
-        <span class="spacer"></span>
-      </header>
-
       <div id="card" class="card" role="button" tabindex="0" aria-label="Tap to reveal translation">
         <div class="face front">
+          <header class="card-header">
+            <button id="home-btn" aria-label="Back to menu">←</button>
+            <span id="counter">0 / 0</span>
+            <span class="spacer"></span>
+          </header>
           <div class="hint" id="hint"></div>
           <div class="term" id="term">Loading…</div>
-          <div class="pron" id="pron"></div>
+          <div class="sub" id="sub"></div>
           <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
         </div>
         <div class="face back">
           <div class="term" id="translation"></div>
-          <div class="pron" id="pron-back"></div>
+          <div class="sub" id="sub-back"></div>
           <button class="speak" id="speak-back" aria-label="Speak Italian">🔊</button>
         </div>
       </div>
