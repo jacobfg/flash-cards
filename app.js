@@ -135,7 +135,7 @@ document.querySelectorAll('.mode').forEach((btn) => {
   btn.addEventListener('click', () => startMode(btn.dataset.mode));
 });
 
-el.homeBtn.addEventListener('click', goHome);
+el.homeBtn.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
 el.homeBtnBack.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
 
 el.card.addEventListener('click', (e) => {
