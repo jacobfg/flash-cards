@@ -30,7 +30,6 @@ body {
 #app {
   position: fixed;
   inset: 0;
-  padding: var(--safe-top) 0 0;
   display: flex;
   flex-direction: column;
 }
@@ -44,7 +43,7 @@ body {
 
 .card-header {
   position: absolute;
-  top: 12px;
+  top: calc(12px + var(--safe-top));
   left: 12px;
   right: 12px;
   display: flex;
@@ -163,7 +162,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: calc(24px + var(--safe-top)) 24px 24px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);

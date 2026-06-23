@@ -21,7 +21,16 @@ const el = {
   homeBtnBack: document.getElementById('home-btn-back'),
   speak: document.getElementById('speak'),
   speakBack: document.getElementById('speak-back'),
+  themeColor: document.querySelector('meta[name="theme-color"]'),
 };
+
+// iOS paints the safe-area strip above the web view with theme-color.
+// Match it to the visible face so the strip blends with the card.
+const FRONT_COLOR = '#ffffff';
+const BACK_COLOR = '#fef9e7';
+function setThemeColor(color) {
+  if (el.themeColor) el.themeColor.setAttribute('content', color);
+}
 
 // English translations come comma-joined; first one is the headline,
 // the rest sit on a sub line.
@@ -63,6 +72,7 @@ function render() {
 function setFlipped(value) {
   state.flipped = value;
   el.card.classList.toggle('flipped', value);
+  setThemeColor(value ? BACK_COLOR : FRONT_COLOR);
 }
 
 function go(delta) {
@@ -114,6 +124,7 @@ function goHome() {
   state.mode = null;
   el.deck.hidden = true;
   el.home.hidden = false;
+  setThemeColor(FRONT_COLOR);
   audioPlayer.pause();
   if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
