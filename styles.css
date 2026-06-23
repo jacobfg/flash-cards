@@ -30,7 +30,7 @@ body {
   height: 100vh;
   height: 100dvh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   padding: calc(12px + var(--safe-top)) 16px calc(12px + var(--safe-bottom));
   gap: 12px;
 }
@@ -131,28 +131,6 @@ header button {
 }
 
 .speak:active { transform: scale(0.95); }
-
-nav {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 10px;
-}
-
-nav button {
-  background: #2a2a4a;
-  border: none;
-  color: white;
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-nav button:active { background: #3a3a5e; }
-
-#flip { background: var(--accent); }
-#flip:active { background: #c43850; }
 
 .card.swipe-left  { animation: swipeLeft 0.3s ease forwards; }
 .card.swipe-right { animation: swipeRight 0.3s ease forwards; }

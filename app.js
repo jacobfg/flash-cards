@@ -12,9 +12,6 @@ const el = {
   hint: document.getElementById('hint'),
   pron: document.getElementById('pron'),
   counter: document.getElementById('counter'),
-  prev: document.getElementById('prev'),
-  next: document.getElementById('next'),
-  flip: document.getElementById('flip'),
   speak: document.getElementById('speak'),
   shuffle: document.getElementById('shuffle'),
   reset: document.getElementById('reset'),
@@ -38,7 +35,6 @@ function render() {
 function setFlipped(value) {
   state.flipped = value;
   el.card.classList.toggle('flipped', value);
-  el.flip.textContent = value ? 'Hide' : 'Reveal';
 }
 
 function go(delta) {
@@ -78,9 +74,6 @@ el.card.addEventListener('click', (e) => {
   setFlipped(!state.flipped);
 });
 
-el.flip.addEventListener('click', () => setFlipped(!state.flipped));
-el.prev.addEventListener('click', () => go(-1));
-el.next.addEventListener('click', () => go(1));
 el.speak.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
 el.shuffle.addEventListener('click', shuffle);
 el.reset.addEventListener('click', resetOrder);
