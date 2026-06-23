@@ -20,7 +20,6 @@ const el = {
   counterBack: document.getElementById('counter-back'),
   homeBtnBack: document.getElementById('home-btn-back'),
   speak: document.getElementById('speak'),
-  speakBack: document.getElementById('speak-back'),
   themeColor: document.querySelector('meta[name="theme-color"]'),
 };
 
@@ -143,7 +142,6 @@ el.card.addEventListener('click', (e) => {
 });
 
 el.speak.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
-el.speakBack.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
 
 document.addEventListener('keydown', (e) => {
   if (el.deck.hidden) return;

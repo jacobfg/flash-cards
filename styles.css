@@ -148,6 +148,7 @@ body.revealed {
 }
 
 .deck {
+  position: relative;
   height: 100%;
 }
 
