@@ -10,6 +10,7 @@ const el = {
   term: document.getElementById('term'),
   translation: document.getElementById('translation'),
   hint: document.getElementById('hint'),
+  pron: document.getElementById('pron'),
   counter: document.getElementById('counter'),
   prev: document.getElementById('prev'),
   next: document.getElementById('next'),
@@ -29,6 +30,7 @@ function render() {
   el.term.textContent = card.it;
   el.translation.textContent = card.en;
   el.hint.textContent = card.hint || '';
+  el.pron.textContent = card.pron || '';
   el.counter.textContent = `${state.index + 1} / ${state.order.length}`;
   setFlipped(false);
 }

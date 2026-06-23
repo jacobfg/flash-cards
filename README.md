@@ -4,13 +4,21 @@ A tiny PWA for studying Italian vocabulary. Tap to reveal, swipe between cards, 
 
 ## Edit your deck
 
-All cards live in [`cards.json`](cards.json). Each entry:
+Edit [`cards-basic.json`](cards-basic.json) — just English (and an optional hint):
 
 ```json
-{ "it": "Buongiorno", "en": "Good morning", "hint": "formal, before noon" }
+{ "en": "Good morning", "hint": "formal, before noon" }
 ```
 
-`hint` is optional. Order in the file = order in the app (until you tap Shuffle).
+Then regenerate the full deck:
+
+```sh
+node generate.js
+```
+
+This calls the local `claude` CLI to translate to Italian and produce a pronunciation respelling, writing [`cards.json`](cards.json) (the file the app actually reads). Existing entries are cached by `en` + `hint`, so reruns only fetch new ones.
+
+Order in `cards-basic.json` = order in the app (until you tap Shuffle).
 
 ## Run locally
 

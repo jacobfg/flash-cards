@@ -1,22 +1,121 @@
 [
-  { "it": "Ciao",              "en": "Hello / Bye",          "hint": "informal greeting" },
-  { "it": "Buongiorno",        "en": "Good morning",         "hint": "formal, before noon" },
-  { "it": "Buonasera",         "en": "Good evening" },
-  { "it": "Per favore",        "en": "Please" },
-  { "it": "Grazie",            "en": "Thank you" },
-  { "it": "Prego",             "en": "You're welcome" },
-  { "it": "Scusa",             "en": "Sorry / Excuse me",    "hint": "informal" },
-  { "it": "Sì",                "en": "Yes" },
-  { "it": "No",                "en": "No" },
-  { "it": "Come stai?",        "en": "How are you?",         "hint": "informal" },
-  { "it": "Sto bene",          "en": "I'm well" },
-  { "it": "Mi chiamo…",        "en": "My name is…" },
-  { "it": "Parli inglese?",    "en": "Do you speak English?" },
-  { "it": "Non capisco",       "en": "I don't understand" },
-  { "it": "Dov'è il bagno?",   "en": "Where is the bathroom?" },
-  { "it": "Quanto costa?",     "en": "How much does it cost?" },
-  { "it": "Un caffè, per favore", "en": "A coffee, please" },
-  { "it": "Il conto, per favore", "en": "The bill, please" },
-  { "it": "Buon appetito",     "en": "Enjoy your meal" },
-  { "it": "A domani",          "en": "See you tomorrow" }
+  {
+    "it": "Ciao",
+    "pron": "CHOW",
+    "en": "Hello / Bye",
+    "hint": "informal greeting"
+  },
+  {
+    "it": "Buongiorno",
+    "pron": "bwon-JOR-no",
+    "en": "Good morning",
+    "hint": "formal, before noon"
+  },
+  {
+    "it": "Buonasera",
+    "pron": "bwo-na-SEH-rah",
+    "en": "Good evening"
+  },
+  {
+    "it": "Per favore",
+    "pron": "pehr fa-VOH-reh",
+    "en": "Please"
+  },
+  {
+    "it": "Grazie",
+    "pron": "GRAH-tsyeh",
+    "en": "Thank you"
+  },
+  {
+    "it": "Prego",
+    "pron": "PREH-go",
+    "en": "You're welcome"
+  },
+  {
+    "it": "Scusa",
+    "pron": "SKOO-zah",
+    "en": "Sorry / Excuse me",
+    "hint": "informal"
+  },
+  {
+    "it": "Sì",
+    "pron": "SEE",
+    "en": "Yes"
+  },
+  {
+    "it": "No",
+    "pron": "NOH",
+    "en": "No"
+  },
+  {
+    "it": "Come stai?",
+    "pron": "KOH-meh STAH-ee",
+    "en": "How are you?",
+    "hint": "informal"
+  },
+  {
+    "it": "Sto bene",
+    "pron": "stoh BEH-neh",
+    "en": "I'm well"
+  },
+  {
+    "it": "Mi chiamo…",
+    "pron": "mee KYAH-mo",
+    "en": "My name is…"
+  },
+  {
+    "it": "Parli inglese?",
+    "pron": "PAR-lee een-GLEH-zeh",
+    "en": "Do you speak English?"
+  },
+  {
+    "it": "Non capisco",
+    "pron": "nohn ka-PEE-sko",
+    "en": "I don't understand"
+  },
+  {
+    "it": "Dov'è il bagno?",
+    "pron": "doh-VEH eel BAH-nyo",
+    "en": "Where is the bathroom?"
+  },
+  {
+    "it": "Quanto costa?",
+    "pron": "KWAN-toh KOS-tah",
+    "en": "How much does it cost?"
+  },
+  {
+    "it": "Un caffè, per favore",
+    "pron": "oon kaf-FEH, pehr fa-VOH-reh",
+    "en": "A coffee, please"
+  },
+  {
+    "it": "Il conto, per favore",
+    "pron": "eel KON-toh, pehr fa-VOH-reh",
+    "en": "The bill, please"
+  },
+  {
+    "it": "Buon appetito",
+    "pron": "bwon ap-peh-TEE-toh",
+    "en": "Enjoy your meal"
+  },
+  {
+    "it": "A domani",
+    "pron": "ah doh-MAH-nee",
+    "en": "See you tomorrow"
+  },
+  {
+    "it": "Buonanotte",
+    "pron": "bwoh-nah-NOT-teh",
+    "en": "Good night"
+  },
+  {
+    "it": "Che ore sono?",
+    "pron": "keh OH-reh SO-no",
+    "en": "What time is it?"
+  },
+  {
+    "it": "Vorrei un bicchiere di vino rosso",
+    "pron": "vor-RAY oon beek-KYEH-reh dee VEE-no ROS-so",
+    "en": "I would like a glass of red wine"
+  }
 ]
