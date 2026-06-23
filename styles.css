@@ -47,33 +47,42 @@ body {
   top: 12px;
   left: 12px;
   right: 12px;
-  display: grid;
-  grid-template-columns: 40px 1fr 40px;
+  display: flex;
   align-items: center;
-  color: var(--muted);
-  font-size: 14px;
+  justify-content: space-between;
   z-index: 2;
 }
 
-.card-header button {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  font-size: 18px;
-  cursor: pointer;
+.card-header button,
+.card-header #counter,
+.card-header #counter-back {
+  background: var(--text);
+  border: none;
+  color: white;
+  height: 44px;
+  border-radius: 22px;
+  cursor: default;
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
 }
 
-.card-header .spacer { display: block; }
+.card-header button {
+  width: 44px;
+  font-size: 20px;
+  cursor: pointer;
+}
 
-#counter {
+.card-header button:active { transform: scale(0.95); }
+
+#counter,
+#counter-back {
+  padding: 0 16px;
+  font-size: 15px;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
-  text-align: center;
+  letter-spacing: 0.04em;
 }
 
 .home {
@@ -198,17 +207,20 @@ body {
 
 .speak {
   position: absolute;
-  bottom: calc(20px + var(--safe-bottom));
-  right: 20px;
-  width: 52px;
-  height: 52px;
+  bottom: calc(12px + var(--safe-bottom));
+  right: 12px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   border: none;
-  background: var(--accent);
+  background: var(--text);
   color: white;
-  font-size: 22px;
+  font-size: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .speak:active { transform: scale(0.95); }

@@ -17,6 +17,8 @@ const el = {
   sub: document.getElementById('sub'),
   subBack: document.getElementById('sub-back'),
   counter: document.getElementById('counter'),
+  counterBack: document.getElementById('counter-back'),
+  homeBtnBack: document.getElementById('home-btn-back'),
   speak: document.getElementById('speak'),
   speakBack: document.getElementById('speak-back'),
 };
@@ -52,7 +54,9 @@ function render() {
     el.subBack.textContent = card.pron || '';
   }
   el.hint.textContent = card.hint || '';
-  el.counter.textContent = `${state.index + 1} / ${state.order.length}`;
+  const counterText = `${state.index + 1} / ${state.order.length}`;
+  el.counter.textContent = counterText;
+  el.counterBack.textContent = counterText;
   setFlipped(false);
 }
 
@@ -119,6 +123,7 @@ document.querySelectorAll('.mode').forEach((btn) => {
 });
 
 el.homeBtn.addEventListener('click', goHome);
+el.homeBtnBack.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
 
 el.card.addEventListener('click', (e) => {
   if (e.target.closest('.speak')) return;
