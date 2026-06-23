@@ -1,121 +1,230 @@
 [
   {
-    "it": "Ciao",
-    "pron": "CHOW",
-    "en": "Hello / Bye",
-    "hint": "informal greeting"
+    "it": "una",
+    "en": "one, an, a, one o'clock",
+    "audio": "audio/3fe0491aa27ae03c55deafa4baab1f4c.mp3",
+    "pron": "OO-nah"
   },
   {
-    "it": "Buongiorno",
-    "pron": "bwon-JOR-no",
-    "en": "Good morning",
-    "hint": "formal, before noon"
+    "it": "sorella",
+    "en": "sister, sister's",
+    "audio": "audio/07ec1fa7b90c9cb02d89264bf2510127.mp3",
+    "pron": "so-REL-lah"
   },
   {
-    "it": "Buonasera",
-    "pron": "bwo-na-SEH-rah",
-    "en": "Good evening"
+    "it": "figlia",
+    "en": "child, girl, daughter",
+    "audio": "audio/0439f771d27a895aa6a18e1d7653255b.mp3",
+    "pron": "FEEL-yah"
   },
   {
-    "it": "Per favore",
-    "pron": "pehr fa-VOH-reh",
-    "en": "Please"
+    "it": "ho",
+    "en": "hold, I'm, i've, wear, I am, own, had, have, keep, stock, I have, have got, i’ve",
+    "audio": "audio/d511ba9586fa89e3fc90fde511fe49ce.mp3",
+    "pron": "oh"
   },
   {
-    "it": "Grazie",
-    "pron": "GRAH-tsyeh",
-    "en": "Thank you"
+    "it": "figlio",
+    "en": "child, son, boy, son's, junior's",
+    "audio": "audio/0b3490c3e6695118afb9dce617ad56b5.mp3",
+    "pron": "FEEL-yo"
   },
   {
-    "it": "Prego",
-    "pron": "PREH-go",
-    "en": "You're welcome"
+    "it": "fratello",
+    "en": "brother",
+    "audio": "audio/20265f38c1592d30908642f36809cf16.mp3",
+    "pron": "frah-TEL-lo"
   },
   {
-    "it": "Scusa",
-    "pron": "SKOO-zah",
-    "en": "Sorry / Excuse me",
-    "hint": "informal"
+    "it": "ah",
+    "en": "oh, ah",
+    "audio": "audio/fec433a922aa3a8a3bc79de79f58c465.mp3",
+    "pron": "ah"
   },
   {
-    "it": "Sì",
-    "pron": "SEE",
-    "en": "Yes"
+    "it": "Milano",
+    "en": "Milan",
+    "audio": "audio/2dbd1dbec1db31e879cfc5eb78ad72fd.mp3",
+    "pron": "mee-LAH-no"
   },
   {
-    "it": "No",
-    "pron": "NOH",
-    "en": "No"
+    "it": "è di",
+    "en": "is from, comes from",
+    "audio": "audio/2965404f03a230277015cd2333f94086.mp3",
+    "pron": "eh dee"
   },
   {
-    "it": "Come stai?",
-    "pron": "KOH-meh STAH-ee",
-    "en": "How are you?",
-    "hint": "informal"
+    "it": "no",
+    "en": "no, not, haven't",
+    "audio": "audio/82958191906f5b65afb3789fbcf7ac7d.mp3",
+    "pron": "no"
   },
   {
-    "it": "Sto bene",
-    "pron": "stoh BEH-neh",
-    "en": "I'm well"
+    "it": "sì",
+    "en": "yes",
+    "audio": "audio/a67cff7f3e6eca0e70b35e601c43fa3d.mp3",
+    "pron": "see"
   },
   {
-    "it": "Mi chiamo…",
-    "pron": "mee KYAH-mo",
-    "en": "My name is…"
+    "it": "tu",
+    "en": "you",
+    "audio": "audio/39f1c3cc90bc2206a34c6165ade3089e.mp3",
+    "pron": "too"
   },
   {
-    "it": "Parli inglese?",
-    "pron": "PAR-lee een-GLEH-zeh",
-    "en": "Do you speak English?"
+    "it": "vero",
+    "en": "right, isn't, true, isn't it, haven't, positive, real, aren't, aren’t, correct, no",
+    "audio": "audio/1aa437df1cc425765cbed1a7420dc16f.mp3",
+    "pron": "VEH-ro"
   },
   {
-    "it": "Non capisco",
-    "pron": "nohn ka-PEE-sko",
-    "en": "I don't understand"
+    "it": "sei di",
+    "en": "you are from, you were born in, come from",
+    "audio": "audio/a97a7f4714b774885aca31651ee09d6c.mp3",
+    "pron": "say dee"
   },
   {
-    "it": "Dov'è il bagno?",
-    "pron": "doh-VEH eel BAH-nyo",
-    "en": "Where is the bathroom?"
+    "it": "Berlino",
+    "en": "Berlin",
+    "audio": "audio/2c19ae59cc9dce4cbb8e397804206edb.mp3",
+    "pron": "behr-LEE-no"
   },
   {
-    "it": "Quanto costa?",
-    "pron": "KWAN-toh KOS-tah",
-    "en": "How much does it cost?"
+    "it": "io",
+    "en": "I",
+    "audio": "audio/7829e3d1c212beabe6647d3214749523.mp3",
+    "pron": "EE-oh"
   },
   {
-    "it": "Un caffè, per favore",
-    "pron": "oon kaf-FEH, pehr fa-VOH-reh",
-    "en": "A coffee, please"
+    "it": "Roma",
+    "en": "Rome",
+    "audio": "audio/5a05267946d1933f8a4f5760c22f56f6.mp3",
+    "pron": "RO-mah"
   },
   {
-    "it": "Il conto, per favore",
-    "pron": "eel KON-toh, pehr fa-VOH-reh",
-    "en": "The bill, please"
+    "it": "buonasera",
+    "en": "good evening",
+    "audio": "audio/87c08154a4bb6aee90bf7b9f69b47a6f.mp3",
+    "pron": "bwoh-nah-SEH-rah"
   },
   {
-    "it": "Buon appetito",
-    "pron": "bwon ap-peh-TEE-toh",
-    "en": "Enjoy your meal"
+    "it": "sono di",
+    "en": "am from",
+    "audio": "audio/092dd7663aaafab8ddfb16c511cce597.mp3",
+    "pron": "SO-no dee"
   },
   {
-    "it": "A domani",
-    "pron": "ah doh-MAH-nee",
-    "en": "See you tomorrow"
+    "it": "bene",
+    "en": "well, good, better, things, fine, best, closely, hard, faster, thoroughly",
+    "audio": "audio/27e3d222e85c9a4a6968c7531087561d.mp3",
+    "pron": "BEH-neh"
   },
   {
-    "it": "Buonanotte",
-    "pron": "bwoh-nah-NOT-teh",
-    "en": "Good night"
+    "it": "a presto",
+    "en": "see you soon",
+    "audio": "audio/17ee556111748953facd71bd67c19cbd.mp3",
+    "pron": "ah PREH-stoh"
   },
   {
-    "it": "Che ore sono?",
-    "pron": "keh OH-reh SO-no",
-    "en": "What time is it?"
+    "it": "piacere",
+    "en": "nice to meet you",
+    "audio": "audio/4c1eccd418ffdd5df0a67e9364e4b510.mp3",
+    "pron": "pyah-CHEH-reh"
   },
   {
-    "it": "Vorrei un bicchiere di vino rosso",
-    "pron": "vor-RAY oon beek-KYEH-reh dee VEE-no ROS-so",
-    "en": "I would like a glass of red wine"
+    "it": "come va",
+    "en": "how's it going",
+    "audio": "audio/1e14df485d93f09144a5865f85eef4ef.mp3",
+    "pron": "KOH-meh VAH"
+  },
+  {
+    "it": "io sono",
+    "en": "I'm",
+    "audio": "audio/e2f8b7852881c654d8497886a3f45521.mp3",
+    "pron": "EE-oh SOH-noh"
+  },
+  {
+    "it": "buongiorno",
+    "en": "good morning",
+    "audio": "audio/b3c7437f9d6693418394db0416b60e1c.mp3",
+    "pron": "bwon-JOR-no"
+  },
+  {
+    "it": "perfetto",
+    "en": "perfect",
+    "audio": "audio/ca61548283b5eb4143763201703dd136.mp3",
+    "pron": "pehr-FEHT-toh"
+  },
+  {
+    "it": "arrivederci",
+    "en": "goodbye",
+    "audio": "audio/1f106b89c6d53720cc51f078576d012f.mp3",
+    "pron": "ah-ree-veh-DEHR-chee"
+  },
+  {
+    "it": "e",
+    "en": "and",
+    "audio": "audio/29aef040d131d46b8a1c1032e4ee5671.mp3",
+    "pron": "eh"
+  },
+  {
+    "it": "gelato",
+    "en": "frozen, frosted, ice-cold, frozen up, gelato, ice cream, chilled, frozen over, icy",
+    "audio": "audio/782bf542745eedae06d486663c2ff4ee.mp3",
+    "pron": "jeh-LAH-toh"
+  },
+  {
+    "it": "grazie",
+    "en": "thank you",
+    "audio": "audio/d82d923b163d6eb560bef6f4019b5a48.mp3",
+    "pron": "GRAH-tsyeh"
+  },
+  {
+    "it": "o",
+    "en": "or",
+    "audio": "audio/80337f720cc77b2e9669e71f5a967b5a.mp3",
+    "pron": "oh"
+  },
+  {
+    "it": "cornetto",
+    "en": "croissant",
+    "audio": "audio/a732db01ae248582d101c33fae086ff8.mp3",
+    "pron": "kor-NEHT-toh"
+  },
+  {
+    "it": "cappuccino",
+    "en": "cappuccino",
+    "audio": "audio/3b905471a1fe461edf3f64f9fdab8149.mp3",
+    "pron": "kahp-poo-CHEE-noh"
+  },
+  {
+    "it": "per favore",
+    "en": "please",
+    "audio": "audio/55e1eb67da168a5e04cb814f095d3459.mp3",
+    "pron": "pehr fah-VOH-reh"
+  },
+  {
+    "it": "caffè",
+    "en": "coffee",
+    "audio": "audio/459665153d1d53f2bcffeed10e79568a.mp3",
+    "pron": "kahf-FEH"
+  },
+  {
+    "it": "tè",
+    "en": "tea",
+    "audio": "audio/c0fc8d88b417d7c7271245385c10c989.mp3",
+    "pron": "TEH"
+  },
+  {
+    "it": "un",
+    "en": "a, an, one",
+    "audio": "audio/57fa47c230bc6bc8b3646ab03d5e6216.mp3",
+    "pron": "oon"
+  },
+  {
+    "it": "salve",
+    "en": "hello",
+    "audio": "audio/0d5b23e0a4335fd881cd79bad6e08723.mp3",
+    "pron": "SAHL-veh"
   }
 ]

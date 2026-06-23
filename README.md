@@ -2,26 +2,44 @@
 
 A tiny PWA for studying Italian vocabulary. Tap to reveal, swipe between cards, tap the speaker to hear the Italian pronunciation (browser `SpeechSynthesis`, no API key).
 
-## Edit your deck
+## Update your deck
 
-Edit [`cards-basic.yaml`](cards-basic.yaml) — just English (and an optional hint):
+The deck is built from Duolingo's "learned lexemes" — every word you've completed in a course.
 
-```yaml
-- en: Good morning
-  hint: formal, before noon
-- en: Thank you
-```
-
-Then regenerate the full deck:
+Put your credentials in `.env` (gitignored):
 
 ```sh
-npm install          # first time only — pulls js-yaml
-node generate.js
+DUOLINGO_JWT=eyJ...
+DUOLINGO_USER_ID=164045293072623
 ```
 
-This calls the local `claude` CLI to translate to Italian and produce a pronunciation respelling, writing [`cards.json`](cards.json) (the file the app actually reads). Existing entries are cached by `en` + `hint`, so reruns only fetch new ones.
+Then:
 
-Order in `cards-basic.yaml` = order on first load (the app shuffles on every session).
+```sh
+npm run update      # fetch + regenerate in one go
+# or run the halves individually:
+npm run fetch       # pull learned-lexemes.json from Duolingo
+npm run generate    # turn it into cards.json + audio/
+```
+
+`npm run fetch` loads `.env` via Node's built-in `--env-file=.env`. Running `node fetch-lexemes.js` directly will only work if those vars are already exported in your shell.
+
+`update` is shorthand for `node fetch-lexemes.js && node generate.js`:
+
+1. **fetch** paginates the Duolingo API, writing `learned-lexemes.json`.
+2. **generate** reads it, downloads audio MP3s to `audio/`, asks Claude for an English-style pronunciation respelling for any *new* word, and writes `cards.json` (the file the PWA loads). Existing words skip both audio download and Claude.
+
+### Getting your DUOLINGO_JWT
+
+1. Log into duolingo.com in a browser.
+2. Open DevTools → **Network** tab.
+3. Click around — any API call to `duolingo.com/2017-06-30/...` will work.
+4. In the request headers, copy the `Authorization: Bearer eyJ...` value (everything after `Bearer `).
+5. Paste it into `.env` as `DUOLINGO_JWT=...`.
+
+The token typically lasts a few weeks; refresh it the same way when fetches start returning HTTP 401.
+
+The PWA shuffles the deck every session, so order in the source doesn't matter.
 
 ## Run locally
 

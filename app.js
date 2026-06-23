@@ -59,14 +59,25 @@ function go(delta) {
   render();
 }
 
+// Reuse a single Audio element so consecutive taps interrupt cleanly.
+const audioPlayer = new Audio();
+
 function speak() {
   const card = currentCard();
-  if (!card || !('speechSynthesis' in window)) return;
-  speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(card.it);
-  utter.lang = 'it-IT';
-  utter.rate = 0.9;
-  speechSynthesis.speak(utter);
+  if (!card) return;
+  if (card.audio) {
+    audioPlayer.src = card.audio;
+    audioPlayer.currentTime = 0;
+    audioPlayer.play().catch(() => {});
+    return;
+  }
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(card.it);
+    utter.lang = 'it-IT';
+    utter.rate = 0.9;
+    speechSynthesis.speak(utter);
+  }
 }
 
 function shuffleOrder() {
@@ -90,7 +101,8 @@ function goHome() {
   state.mode = null;
   el.deck.hidden = true;
   el.home.hidden = false;
-  speechSynthesis?.cancel?.();
+  audioPlayer.pause();
+  if ('speechSynthesis' in window) speechSynthesis.cancel();
 }
 
 document.querySelectorAll('.mode').forEach((btn) => {

@@ -1,25 +1,24 @@
 #!/usr/bin/env node
-// Generate cards.json from cards-basic.json using the `claude` CLI.
-// Reuses already-translated entries to avoid re-asking Claude on every run.
+// Build cards.json (+ audio/) from Duolingo's learned-lexemes export.
+// Caches: any (it, en, hint) match keeps its cached pron + audio; only
+// new words go to Claude and CloudFront.
 //
 // Usage: node generate.js
-// Requires: `claude` on PATH (Claude Code CLI).
+// Requires: `claude` on PATH.
 
 const fs = require('fs');
+const path = require('path');
 const { spawnSync } = require('child_process');
-const yaml = require('js-yaml');
+const https = require('https');
 
-const BASIC = 'cards-basic.yaml';
+const SOURCE = 'learned-lexemes.json';
 const OUT = 'cards.json';
+const AUDIO_DIR = 'audio';
 const BATCH = 20;
 
-function readJSON(path, fallback) {
-  try { return JSON.parse(fs.readFileSync(path, 'utf8')); }
+function readJSON(p, fallback) {
+  try { return JSON.parse(fs.readFileSync(p, 'utf8')); }
   catch { return fallback; }
-}
-
-function readYAML(path) {
-  return yaml.load(fs.readFileSync(path, 'utf8'));
 }
 
 function callClaude(prompt) {
@@ -29,7 +28,6 @@ function callClaude(prompt) {
 }
 
 function extractJSON(text) {
-  // Claude sometimes wraps JSON in ```json fences or prose. Pull the first [...] or {...} block.
   const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
   if (fence) text = fence[1];
   const start = text.indexOf('[');
@@ -38,66 +36,95 @@ function extractJSON(text) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
-function buildPrompt(items) {
-  const list = items.map((it, i) => {
-    const hintNote = it.hint ? ` (context: ${it.hint})` : '';
-    return `${i + 1}. ${it.en}${hintNote}`;
-  }).join('\n');
-
-  return `Translate each English phrase below to Italian and provide a simple English-style pronunciation respelling (NOT IPA). Capitalize the stressed syllable. Examples: Buongiorno → "bwon-JOR-no", Grazie → "GRAH-tsyeh", Ciao → "CHOW".
-
-For each numbered item, return one JSON object with keys: "it" (Italian translation), "pron" (respelled pronunciation). Preserve any meaning hints in the original English.
+function buildPronPrompt(words) {
+  const list = words.map((it, i) => `${i + 1}. ${it}`).join('\n');
+  return `For each Italian word or phrase, write a simple English-style pronunciation respelling (NOT IPA). Capitalize the stressed syllable. Examples: Buongiorno → "bwon-JOR-no", Grazie → "GRAH-tsyeh", Ciao → "CHOW".
 
 Phrases:
 ${list}
 
-Respond with ONLY a JSON array of ${items.length} objects, in the same order. No prose, no markdown fences.`;
+Respond with ONLY a JSON array of ${words.length} strings, in the same order. No prose, no markdown fences.`;
+}
+
+function downloadAudio(url, dest) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode !== 200) {
+        res.resume();
+        return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
+      }
+      const file = fs.createWriteStream(dest);
+      res.pipe(file);
+      file.on('finish', () => file.close(resolve));
+      file.on('error', reject);
+    }).on('error', reject);
+  });
+}
+
+function audioFilename(url) {
+  return path.basename(new URL(url).pathname) + '.mp3';
 }
 
 async function main() {
-  const basic = readYAML(BASIC);
-  if (!Array.isArray(basic)) {
-    console.error(`Missing or invalid ${BASIC}`);
+  const raw = readJSON(SOURCE, null);
+  const lexemes = raw?.learnedLexemes;
+  if (!Array.isArray(lexemes)) {
+    console.error(`Missing or invalid ${SOURCE} (expected { learnedLexemes: [...] })`);
     process.exit(1);
   }
 
   const existing = readJSON(OUT, []);
-  const cache = new Map();
+  const pronCache = new Map();
   for (const c of existing) {
-    if (c.en && c.it && c.pron) cache.set(cacheKey(c), c);
+    if (c.it && c.pron) pronCache.set(c.it, c.pron);
   }
 
-  const result = new Array(basic.length);
-  const toFetch = [];
-  basic.forEach((b, i) => {
-    const cached = cache.get(cacheKey(b));
-    if (cached) result[i] = { ...cached, ...b };
-    else toFetch.push({ index: i, item: b });
-  });
+  if (!fs.existsSync(AUDIO_DIR)) fs.mkdirSync(AUDIO_DIR);
 
-  console.log(`${basic.length} cards: ${basic.length - toFetch.length} cached, ${toFetch.length} to fetch`);
+  const cards = [];
+  const audioJobs = [];
+  const needPron = [];
 
-  for (let i = 0; i < toFetch.length; i += BATCH) {
-    const chunk = toFetch.slice(i, i + BATCH);
-    const items = chunk.map(c => c.item);
-    console.log(`Fetching ${i + 1}-${i + chunk.length}…`);
-    const raw = callClaude(buildPrompt(items));
-    const parsed = extractJSON(raw);
-    if (parsed.length !== chunk.length) {
-      throw new Error(`Expected ${chunk.length} items back, got ${parsed.length}`);
+  for (const lex of lexemes) {
+    const it = lex.text;
+    const en = (lex.translations || []).join(', ');
+    const card = { it, en };
+    if (lex.audioURL) {
+      const file = audioFilename(lex.audioURL);
+      card.audio = `${AUDIO_DIR}/${file}`;
+      const dest = path.join(AUDIO_DIR, file);
+      if (!fs.existsSync(dest)) audioJobs.push({ url: lex.audioURL, dest });
     }
-    chunk.forEach(({ index, item }, k) => {
-      const { it, pron } = parsed[k];
-      result[index] = { it, pron, en: item.en, ...(item.hint ? { hint: item.hint } : {}) };
-    });
+    const cached = pronCache.get(it);
+    if (cached) card.pron = cached;
+    else needPron.push(it);
+    cards.push(card);
   }
 
-  fs.writeFileSync(OUT, JSON.stringify(result, null, 2) + '\n');
-  console.log(`Wrote ${OUT} (${result.length} cards)`);
+  console.log(`${cards.length} cards: ${needPron.length} need pronunciation, ${audioJobs.length} need audio download`);
+
+  for (let i = 0; i < needPron.length; i += BATCH) {
+    const chunk = needPron.slice(i, i + BATCH);
+    console.log(`Pronunciation ${i + 1}-${i + chunk.length}…`);
+    const out = extractJSON(callClaude(buildPronPrompt(chunk)));
+    if (out.length !== chunk.length) {
+      throw new Error(`Expected ${chunk.length} pronunciations, got ${out.length}`);
+    }
+    chunk.forEach((it, k) => pronCache.set(it, out[k]));
+  }
+  for (const card of cards) {
+    if (!card.pron) card.pron = pronCache.get(card.it);
+  }
+
+  for (let i = 0; i < audioJobs.length; i++) {
+    const { url, dest } = audioJobs[i];
+    process.stdout.write(`Audio ${i + 1}/${audioJobs.length}: ${path.basename(dest)}\r`);
+    await downloadAudio(url, dest);
+  }
+  if (audioJobs.length) process.stdout.write('\n');
+
+  fs.writeFileSync(OUT, JSON.stringify(cards, null, 2) + '\n');
+  console.log(`Wrote ${OUT} (${cards.length} cards)`);
 }
 
-function cacheKey(c) {
-  return `${c.en}\x00${c.hint || ''}`;
-}
-
-main().catch(e => { console.error(e); process.exit(1); });
+main().catch((e) => { console.error(e); process.exit(1); });

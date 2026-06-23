@@ -2,9 +2,9 @@
   "name": "flash-cards",
   "private": true,
   "scripts": {
-    "generate": "node generate.js"
+    "fetch": "node --env-file=.env fetch-lexemes.js",
+    "generate": "node generate.js",
+    "update": "npm run fetch && npm run generate"
   },
-  "dependencies": {
-    "js-yaml": "^4.1.0"
-  }
+  "dependencies": {}
 }
