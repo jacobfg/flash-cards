@@ -72,6 +72,7 @@ function render() {
 function setFlipped(value) {
   state.flipped = value;
   el.card.classList.toggle('flipped', value);
+  document.body.classList.toggle('revealed', value);
   setThemeColor(value ? BACK_COLOR : FRONT_COLOR);
 }
 
