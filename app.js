@@ -124,6 +124,8 @@ function goHome() {
   state.mode = null;
   el.deck.hidden = true;
   el.home.hidden = false;
+  el.card.classList.remove('flipped');
+  document.body.classList.remove('revealed');
   setThemeColor(FRONT_COLOR);
   audioPlayer.pause();
   if ('speechSynthesis' in window) speechSynthesis.cancel();
