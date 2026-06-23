@@ -76,7 +76,7 @@ function collectProgressedSkills(course) {
 async function main() {
   console.log('Fetching course progress…');
   const profile = await request(
-    `https://www.duolingo.com/2023-05-23/users/${USER_ID}?fields=courses,currentCourse,currentCourseId,picture`
+    `https://www.duolingo.com/2023-05-23/users/${USER_ID}?fields=courses,currentCourse,currentCourseId`
   );
   const course = profile.currentCourse;
   if (!course) throw new Error('User profile has no currentCourse');
@@ -115,37 +115,6 @@ async function main() {
     }) + '\n'
   );
   console.log(`Wrote ${OUT} (${allLexemes.length} lexemes)`);
-
-  // Write user metadata to a sidecar file so generate.js can fold it into
-  // cards.json without downloading anything.
-  // Download the avatar to a committed local file so the repo never holds
-  // a Duolingo URL with the user's ID.
-  if (profile.picture) {
-    const base = profile.picture.startsWith('http') ? profile.picture : `https:${profile.picture}`;
-    const url = `${base}/xxlarge`;
-    console.log(`Avatar: ${url}`);
-    await downloadBinary(url, 'avatar.png');
-    console.log('Wrote avatar.png');
-  }
-}
-
-function downloadBinary(url, dest) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        res.resume();
-        return downloadBinary(res.headers.location, dest).then(resolve, reject);
-      }
-      if (res.statusCode !== 200) {
-        res.resume();
-        return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
-      }
-      const file = fs.createWriteStream(dest);
-      res.pipe(file);
-      file.on('finish', () => file.close(resolve));
-      file.on('error', reject);
-    }).on('error', reject);
-  });
 }
 
 main().catch((e) => { console.error(e.message); process.exit(1); });
