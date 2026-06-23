@@ -29,8 +29,8 @@ Audio and avatar stream straight from Duolingo's CDN — nothing copyrighted is 
 Credentials go in a local `.env` (gitignored):
 
 ```sh
-DUOLINGO_JWT=eyJ...
-DUOLINGO_USER_ID=164045293072623
+DUOLINGO_JWT=...
+DUOLINGO_USER_ID=...
 ```
 
 Then:

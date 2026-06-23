@@ -5,8 +5,8 @@
 //      word those skills taught, with audio URLs.
 //
 // Usage:
-//   echo 'DUOLINGO_JWT=eyJ...'        >  .env
-//   echo 'DUOLINGO_USER_ID=164045...' >> .env
+//   echo 'DUOLINGO_JWT=...'     >  .env
+//   echo 'DUOLINGO_USER_ID=...' >> .env
 //   node fetch-lexemes.js
 
 const fs = require('fs');
@@ -118,12 +118,34 @@ async function main() {
 
   // Write user metadata to a sidecar file so generate.js can fold it into
   // cards.json without downloading anything.
+  // Download the avatar to a committed local file so the repo never holds
+  // a Duolingo URL with the user's ID.
   if (profile.picture) {
     const base = profile.picture.startsWith('http') ? profile.picture : `https:${profile.picture}`;
-    const avatarURL = `${base}/xxlarge`;
-    fs.writeFileSync('user.json', JSON.stringify({ avatarURL }) + '\n');
-    console.log(`Avatar: ${avatarURL}`);
+    const url = `${base}/xxlarge`;
+    console.log(`Avatar: ${url}`);
+    await downloadBinary(url, 'avatar.png');
+    console.log('Wrote avatar.png');
   }
+}
+
+function downloadBinary(url, dest) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        res.resume();
+        return downloadBinary(res.headers.location, dest).then(resolve, reject);
+      }
+      if (res.statusCode !== 200) {
+        res.resume();
+        return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
+      }
+      const file = fs.createWriteStream(dest);
+      res.pipe(file);
+      file.on('finish', () => file.close(resolve));
+      file.on('error', reject);
+    }).on('error', reject);
+  });
 }
 
 main().catch((e) => { console.error(e.message); process.exit(1); });

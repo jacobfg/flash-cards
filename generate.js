@@ -89,10 +89,7 @@ async function main() {
     if (!card.pron) card.pron = pronCache.get(card.it);
   }
 
-  // Fold in user metadata (e.g. avatar URL) from the fetch step.
-  const user = readJSON('user.json', null);
-  const out = user ? { user, cards } : { cards };
-  fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
+  fs.writeFileSync(OUT, JSON.stringify({ cards }, null, 2) + '\n');
   console.log(`Wrote ${OUT} (${cards.length} cards)`);
 }
 

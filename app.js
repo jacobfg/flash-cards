@@ -215,11 +215,6 @@ async function load() {
   // Tolerate the older flat-array shape so existing installs don't break
   // before the SW updates.
   state.cards = Array.isArray(data) ? data : (data.cards || []);
-  const avatarURL = !Array.isArray(data) && data.user?.avatarURL;
-  if (avatarURL) {
-    const img = document.getElementById('avatar');
-    if (img) img.src = avatarURL;
-  }
 }
 
 if ('serviceWorker' in navigator) {
