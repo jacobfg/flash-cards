@@ -53,6 +53,18 @@
         </div>
       </div>
       <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
+      <button class="word-list" id="word-list-btn" aria-label="Jump to word">☰</button>
+
+      <div id="sheet" class="sheet" hidden>
+        <div class="sheet-backdrop" id="sheet-backdrop"></div>
+        <div class="sheet-panel">
+          <header class="sheet-header">
+            <span class="sheet-title">Jump to word</span>
+            <button class="sheet-close" id="sheet-close" aria-label="Close">✕</button>
+          </header>
+          <ul id="word-list" class="word-list-items"></ul>
+        </div>
+      </div>
     </section>
   </main>
   <script src="app.js"></script>

@@ -20,6 +20,11 @@ const el = {
   counterBack: document.getElementById('counter-back'),
   homeBtnBack: document.getElementById('home-btn-back'),
   speak: document.getElementById('speak'),
+  wordListBtn: document.getElementById('word-list-btn'),
+  sheet: document.getElementById('sheet'),
+  sheetBackdrop: document.getElementById('sheet-backdrop'),
+  sheetClose: document.getElementById('sheet-close'),
+  wordList: document.getElementById('word-list'),
   themeColor: document.querySelector('meta[name="theme-color"]'),
 };
 
@@ -126,9 +131,39 @@ function goHome() {
   el.home.hidden = false;
   el.card.classList.remove('flipped');
   document.body.classList.remove('revealed');
+  closeSheet();
   setThemeColor(FRONT_COLOR);
   audioPlayer.pause();
   if ('speechSynthesis' in window) speechSynthesis.cancel();
+}
+
+function openSheet() {
+  // Build the word list in current order. The current card is highlighted,
+  // and tapping any entry jumps to it.
+  el.wordList.innerHTML = '';
+  state.order.forEach((cardIdx, listIdx) => {
+    const card = state.cards[cardIdx];
+    const en = splitEn(card.en).first;
+    const li = document.createElement('li');
+    li.textContent = state.mode === 'it' ? card.it : en;
+    if (listIdx === state.index) li.classList.add('current');
+    li.addEventListener('click', () => {
+      state.index = listIdx;
+      render();
+      closeSheet();
+    });
+    el.wordList.appendChild(li);
+  });
+  el.sheet.hidden = false;
+  // Scroll current into view after layout.
+  requestAnimationFrame(() => {
+    const current = el.wordList.querySelector('.current');
+    current?.scrollIntoView({ block: 'center' });
+  });
+}
+
+function closeSheet() {
+  el.sheet.hidden = true;
 }
 
 document.querySelectorAll('.mode').forEach((btn) => {
@@ -144,9 +179,13 @@ el.card.addEventListener('click', (e) => {
 });
 
 el.speak.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
+el.wordListBtn.addEventListener('click', (e) => { e.stopPropagation(); openSheet(); });
+el.sheetBackdrop.addEventListener('click', closeSheet);
+el.sheetClose.addEventListener('click', closeSheet);
 
 document.addEventListener('keydown', (e) => {
   if (el.deck.hidden) return;
+  if (e.key === 'Escape' && !el.sheet.hidden) { closeSheet(); return; }
   if (e.key === 'ArrowLeft') go(-1);
   else if (e.key === 'ArrowRight') go(1);
   else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); setFlipped(!state.flipped); }
