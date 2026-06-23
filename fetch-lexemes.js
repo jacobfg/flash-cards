@@ -73,10 +73,29 @@ function collectProgressedSkills(course) {
   return out;
 }
 
+function downloadBinary(url, dest) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        res.resume();
+        return downloadBinary(res.headers.location, dest).then(resolve, reject);
+      }
+      if (res.statusCode !== 200) {
+        res.resume();
+        return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
+      }
+      const file = fs.createWriteStream(dest);
+      res.pipe(file);
+      file.on('finish', () => file.close(resolve));
+      file.on('error', reject);
+    }).on('error', reject);
+  });
+}
+
 async function main() {
   console.log('Fetching course progress…');
   const profile = await request(
-    `https://www.duolingo.com/2023-05-23/users/${USER_ID}?fields=courses,currentCourse,currentCourseId`
+    `https://www.duolingo.com/2023-05-23/users/${USER_ID}?fields=courses,currentCourse,currentCourseId,picture`
   );
   const course = profile.currentCourse;
   if (!course) throw new Error('User profile has no currentCourse');
@@ -115,6 +134,15 @@ async function main() {
     }) + '\n'
   );
   console.log(`Wrote ${OUT} (${allLexemes.length} lexemes)`);
+
+  if (profile.picture) {
+    const avatarUrl = profile.picture.startsWith('http') ? profile.picture : `https:${profile.picture}`;
+    const url = `${avatarUrl}/xlarge`;
+    console.log(`Avatar: ${url}`);
+    await downloadBinary(url, 'avatar.png');
+    console.log('Wrote avatar.png');
+  }
+
 }
 
 main().catch((e) => { console.error(e.message); process.exit(1); });

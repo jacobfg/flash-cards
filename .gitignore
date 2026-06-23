@@ -2,3 +2,5 @@
 .DS_Store
 node_modules/
 .env
+# Personal/profile dumps from Duolingo's user endpoint
+[0-9]*.json
