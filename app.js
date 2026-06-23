@@ -1,5 +1,6 @@
 const state = {
   cards: [],
+  enLabels: [],  // parallel to cards: disambiguated English-front label
   order: [],
   index: 0,
   flipped: false,
@@ -43,6 +44,24 @@ function splitEn(en) {
   return { first: parts[0] || '', rest: parts.slice(1).join(', ') };
 }
 
+// When two Italian words share the same English first translation (e.g.
+// figlia → "child, girl…" and figlio → "child, son…"), we need to
+// disambiguate the English-front display. Append the next translation in
+// brackets — "child (girl)", "child (son)" — so it's still recognisable.
+function buildEnLabels(cards) {
+  const counts = new Map();
+  for (const c of cards) {
+    const f = splitEn(c.en).first;
+    counts.set(f, (counts.get(f) || 0) + 1);
+  }
+  return cards.map((c) => {
+    const parts = (c.en || '').split(',').map((s) => s.trim()).filter(Boolean);
+    const [first, ...rest] = parts;
+    if (!first || counts.get(first) < 2) return first || '';
+    return rest.length ? `${first} (${rest[0]})` : first;
+  });
+}
+
 function currentCard() {
   return state.cards[state.order[state.index]];
 }
@@ -53,15 +72,18 @@ function render() {
 
   // Front always shows the language the user chose; back shows the other side.
   // The Italian side carries the pronunciation; the English side carries any
-  // alternate translations.
+  // alternate translations. Use the disambiguated English label so two cards
+  // with the same first translation are still distinguishable.
+  const cardIdx = state.order[state.index];
+  const enLabel = state.enLabels[cardIdx];
   const en = splitEn(card.en);
   if (state.mode === 'it') {
     el.term.textContent = card.it;
     el.sub.textContent = card.pron || '';
-    el.translation.textContent = en.first;
+    el.translation.textContent = enLabel;
     el.subBack.textContent = en.rest;
   } else {
-    el.term.textContent = en.first;
+    el.term.textContent = enLabel;
     el.sub.textContent = en.rest;
     el.translation.textContent = card.it;
     el.subBack.textContent = card.pron || '';
@@ -143,9 +165,8 @@ function openSheet() {
   el.wordList.innerHTML = '';
   state.order.forEach((cardIdx, listIdx) => {
     const card = state.cards[cardIdx];
-    const en = splitEn(card.en).first;
     const li = document.createElement('li');
-    li.textContent = state.mode === 'it' ? card.it : en;
+    li.textContent = state.mode === 'it' ? card.it : state.enLabels[cardIdx];
     if (listIdx === state.index) li.classList.add('current');
     li.addEventListener('click', () => {
       state.index = listIdx;
@@ -215,6 +236,7 @@ async function load() {
   // Tolerate the older flat-array shape so existing installs don't break
   // before the SW updates.
   state.cards = Array.isArray(data) ? data : (data.cards || []);
+  state.enLabels = buildEnLabels(state.cards);
 }
 
 if ('serviceWorker' in navigator) {
