@@ -4,3 +4,8 @@ node_modules/
 .env
 # Personal/profile dumps from Duolingo's user endpoint
 [0-9]*.json
+# Local-only / generated assets — hot-linked from Duolingo CDN at runtime
+audio/
+avatar.png
+user.json
+icon-*.png

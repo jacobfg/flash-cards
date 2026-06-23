@@ -88,8 +88,8 @@ const audioPlayer = new Audio();
 function speak() {
   const card = currentCard();
   if (!card) return;
-  if (card.audio) {
-    audioPlayer.src = card.audio;
+  if (card.audioURL) {
+    audioPlayer.src = card.audioURL;
     audioPlayer.currentTime = 0;
     audioPlayer.play().catch(() => {});
     return;
@@ -172,7 +172,17 @@ el.card.addEventListener('touchend', (e) => {
 
 async function load() {
   const res = await fetch('cards.json', { cache: 'no-cache' });
-  state.cards = await res.json();
+  const data = await res.json();
+  // Tolerate the older flat-array shape so existing installs don't break
+  // before the SW updates.
+  state.cards = Array.isArray(data) ? data : (data.cards || []);
+  const avatarURL = !Array.isArray(data) && data.user?.avatarURL;
+  if (avatarURL) {
+    const img = document.getElementById('avatar');
+    if (img) img.src = avatarURL;
+    const appleIcon = document.getElementById('apple-icon');
+    if (appleIcon) appleIcon.href = avatarURL;
+  }
 }
 
 if ('serviceWorker' in navigator) {

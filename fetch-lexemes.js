@@ -73,25 +73,6 @@ function collectProgressedSkills(course) {
   return out;
 }
 
-function downloadBinary(url, dest) {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        res.resume();
-        return downloadBinary(res.headers.location, dest).then(resolve, reject);
-      }
-      if (res.statusCode !== 200) {
-        res.resume();
-        return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
-      }
-      const file = fs.createWriteStream(dest);
-      res.pipe(file);
-      file.on('finish', () => file.close(resolve));
-      file.on('error', reject);
-    }).on('error', reject);
-  });
-}
-
 async function main() {
   console.log('Fetching course progress…');
   const profile = await request(
@@ -135,14 +116,24 @@ async function main() {
   );
   console.log(`Wrote ${OUT} (${allLexemes.length} lexemes)`);
 
+  // Write user metadata to a sidecar file so generate.js can fold it into
+  // cards.json without downloading anything.
   if (profile.picture) {
-    const avatarUrl = profile.picture.startsWith('http') ? profile.picture : `https:${profile.picture}`;
-    const url = `${avatarUrl}/xlarge`;
-    console.log(`Avatar: ${url}`);
-    await downloadBinary(url, 'avatar.png');
-    console.log('Wrote avatar.png');
-  }
+    const base = profile.picture.startsWith('http') ? profile.picture : `https:${profile.picture}`;
+    const avatarURL = `${base}/xxlarge`;
+    fs.writeFileSync('user.json', JSON.stringify({ avatarURL }) + '\n');
+    console.log(`Avatar: ${avatarURL}`);
 
+    // Bake the avatar URL into the manifest so the homescreen icon comes
+    // straight from Duolingo's CDN — no icon files to commit.
+    const manifestPath = 'manifest.webmanifest';
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    manifest.icons = [
+      { src: avatarURL, sizes: '192x192 512x512 1000x1000', type: 'image/png' },
+    ];
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    console.log(`Updated ${manifestPath} with avatar URL`);
+  }
 }
 
 main().catch((e) => { console.error(e.message); process.exit(1); });
