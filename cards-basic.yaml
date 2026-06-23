@@ -1,0 +1,30 @@
+# Source of truth for the deck. Edit, then run `node generate.js`.
+# Each entry: `- en: <english>` (required), `hint: <short note>` (optional).
+
+- en: Hello / Bye
+  hint: informal greeting
+- en: Good morning
+  hint: formal, before noon
+- en: Good evening
+- en: Please
+- en: Thank you
+- en: You're welcome
+- en: Sorry / Excuse me
+  hint: informal
+- en: Yes
+- en: No
+- en: How are you?
+  hint: informal
+- en: I'm well
+- en: My name is…
+- en: Do you speak English?
+- en: I don't understand
+- en: Where is the bathroom?
+- en: How much does it cost?
+- en: A coffee, please
+- en: The bill, please
+- en: Enjoy your meal
+- en: See you tomorrow
+- en: Good night
+- en: What time is it?
+- en: I would like a glass of red wine

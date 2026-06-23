@@ -1,0 +1,10 @@
+{
+  "name": "flash-cards",
+  "private": true,
+  "scripts": {
+    "generate": "node generate.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

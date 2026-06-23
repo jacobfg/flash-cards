@@ -7,14 +7,19 @@
 
 const fs = require('fs');
 const { spawnSync } = require('child_process');
+const yaml = require('js-yaml');
 
-const BASIC = 'cards-basic.json';
+const BASIC = 'cards-basic.yaml';
 const OUT = 'cards.json';
 const BATCH = 20;
 
 function readJSON(path, fallback) {
   try { return JSON.parse(fs.readFileSync(path, 'utf8')); }
   catch { return fallback; }
+}
+
+function readYAML(path) {
+  return yaml.load(fs.readFileSync(path, 'utf8'));
 }
 
 function callClaude(prompt) {
@@ -50,7 +55,7 @@ Respond with ONLY a JSON array of ${items.length} objects, in the same order. No
 }
 
 async function main() {
-  const basic = readJSON(BASIC, null);
+  const basic = readYAML(BASIC);
   if (!Array.isArray(basic)) {
     console.error(`Missing or invalid ${BASIC}`);
     process.exit(1);
