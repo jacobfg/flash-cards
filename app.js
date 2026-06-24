@@ -10,24 +10,59 @@ const state = {
 const el = {
   home: document.getElementById('home'),
   deck: document.getElementById('deck'),
-  homeBtn: document.getElementById('home-btn'),
   card: document.getElementById('card'),
   term: document.getElementById('term'),
   translation: document.getElementById('translation'),
   hint: document.getElementById('hint'),
   sub: document.getElementById('sub'),
   subBack: document.getElementById('sub-back'),
-  counter: document.getElementById('counter'),
-  counterBack: document.getElementById('counter-back'),
-  homeBtnBack: document.getElementById('home-btn-back'),
-  speak: document.getElementById('speak'),
-  wordListBtn: document.getElementById('word-list-btn'),
   sheet: document.getElementById('sheet'),
   sheetBackdrop: document.getElementById('sheet-backdrop'),
   sheetClose: document.getElementById('sheet-close'),
   wordList: document.getElementById('word-list'),
+  progressEls: document.querySelectorAll('.face .progress'),
+  swipeHint: document.getElementById('swipe-hint'),
   themeColor: document.querySelector('meta[name="theme-color"]'),
 };
+
+const IDLE_MS = 3000;
+let idleTimer = null;
+
+function bumpIdle() {
+  el.card.classList.remove('idle');
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(() => {
+    if (!el.deck.hidden) el.card.classList.add('idle');
+  }, IDLE_MS);
+}
+
+const PROGRESS_DOTS = 10;
+
+// Render 10 dots as a fill-ratio bar across both faces' progress containers.
+// Total progress is (index+1)/length, split across 10 slices.
+function renderProgress() {
+  const total = state.order.length;
+  const progress = total ? (state.index + 1) / total : 0;
+  const filled = progress * PROGRESS_DOTS;
+  el.progressEls.forEach((container) => {
+    if (container.children.length !== PROGRESS_DOTS) {
+      container.innerHTML = '';
+      for (let i = 0; i < PROGRESS_DOTS; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        container.appendChild(dot);
+      }
+    }
+    for (let i = 0; i < PROGRESS_DOTS; i++) {
+      const fillAmount = Math.max(0, Math.min(1, filled - i));
+      container.children[i].style.setProperty('--fill', fillAmount);
+    }
+  });
+}
+
+function dismissSwipeHint() {
+  el.swipeHint.hidden = true;
+}
 
 // iOS paints the safe-area strip above the web view with theme-color.
 // Match it to the visible face so the strip blends with the card.
@@ -89,9 +124,7 @@ function render() {
     el.subBack.textContent = card.pron || '';
   }
   el.hint.textContent = card.hint || '';
-  const counterText = `${state.index + 1} / ${state.order.length}`;
-  el.counter.textContent = counterText;
-  el.counterBack.textContent = counterText;
+  renderProgress();
   setFlipped(false);
 }
 
@@ -144,7 +177,9 @@ function startMode(mode) {
   shuffleOrder();
   el.home.hidden = true;
   el.deck.hidden = false;
+  el.swipeHint.hidden = false;
   render();
+  bumpIdle();
 }
 
 function goHome() {
@@ -152,6 +187,8 @@ function goHome() {
   el.deck.hidden = true;
   el.home.hidden = false;
   el.card.classList.remove('flipped');
+  el.card.classList.remove('idle');
+  clearTimeout(idleTimer);
   document.body.classList.remove('revealed');
   closeSheet();
   setThemeColor(FRONT_COLOR);
@@ -160,23 +197,29 @@ function goHome() {
 }
 
 function openSheet() {
-  // Build the word list in current order. The current card is highlighted,
-  // and tapping any entry jumps to it.
+  // Sort entries alphabetically by what's shown (Italian or English).
+  // Tapping jumps to that card; the deck's shuffle order is unaffected.
   el.wordList.innerHTML = '';
-  state.order.forEach((cardIdx, listIdx) => {
-    const card = state.cards[cardIdx];
+  const collator = new Intl.Collator(state.mode === 'it' ? 'it' : 'en', { sensitivity: 'base' });
+  const labelFor = (cardIdx) =>
+    state.mode === 'it' ? state.cards[cardIdx].it : state.enLabels[cardIdx];
+  const currentCardIdx = state.order[state.index];
+
+  const entries = state.order.map((cardIdx, listIdx) => ({ cardIdx, listIdx }))
+    .sort((a, b) => collator.compare(labelFor(a.cardIdx), labelFor(b.cardIdx)));
+
+  for (const { cardIdx, listIdx } of entries) {
     const li = document.createElement('li');
-    li.textContent = state.mode === 'it' ? card.it : state.enLabels[cardIdx];
-    if (listIdx === state.index) li.classList.add('current');
+    li.textContent = labelFor(cardIdx);
+    if (cardIdx === currentCardIdx) li.classList.add('current');
     li.addEventListener('click', () => {
       state.index = listIdx;
       render();
       closeSheet();
     });
     el.wordList.appendChild(li);
-  });
+  }
   el.sheet.hidden = false;
-  // Scroll current into view after layout.
   requestAnimationFrame(() => {
     const current = el.wordList.querySelector('.current');
     current?.scrollIntoView({ block: 'center' });
@@ -191,22 +234,30 @@ document.querySelectorAll('.mode').forEach((btn) => {
   btn.addEventListener('click', () => startMode(btn.dataset.mode));
 });
 
-el.homeBtn.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
-el.homeBtnBack.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
+// The card-header / card-footer controls are duplicated on each face so
+// they animate with the flip — wire every instance to the same handler.
+document.querySelectorAll('.home-btn').forEach((btn) => {
+  btn.addEventListener('click', (e) => { e.stopPropagation(); goHome(); });
+});
+document.querySelectorAll('.card-footer .speak').forEach((btn) => {
+  btn.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
+});
+document.querySelectorAll('.card-footer .word-list').forEach((btn) => {
+  btn.addEventListener('click', (e) => { e.stopPropagation(); openSheet(); });
+});
 
 el.card.addEventListener('click', (e) => {
-  if (e.target.closest('.speak')) return;
+  if (e.target.closest('.speak, .word-list, .home-btn')) return;
   setFlipped(!state.flipped);
 });
 
-el.speak.addEventListener('click', (e) => { e.stopPropagation(); speak(); });
-el.wordListBtn.addEventListener('click', (e) => { e.stopPropagation(); openSheet(); });
 el.sheetBackdrop.addEventListener('click', closeSheet);
 el.sheetClose.addEventListener('click', closeSheet);
 
 document.addEventListener('keydown', (e) => {
   if (el.deck.hidden) return;
   if (e.key === 'Escape' && !el.sheet.hidden) { closeSheet(); return; }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') dismissSwipeHint();
   if (e.key === 'ArrowLeft') go(-1);
   else if (e.key === 'ArrowRight') go(1);
   else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); setFlipped(!state.flipped); }
@@ -225,10 +276,19 @@ el.card.addEventListener('touchend', (e) => {
   const dx = e.changedTouches[0].clientX - touchStartX;
   const dy = e.changedTouches[0].clientY - touchStartY;
   if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+    dismissSwipeHint();
     if (dx < 0) go(1);
     else go(-1);
   }
 }, { passive: true });
+
+// Any pointer or key activity wakes the controls. Bound on capture so we
+// catch taps before they trigger flips/swipes.
+['pointerdown', 'pointermove', 'keydown'].forEach((evt) => {
+  document.addEventListener(evt, () => {
+    if (!el.deck.hidden) bumpIdle();
+  }, { passive: true });
+});
 
 async function load() {
   const res = await fetch('cards.json', { cache: 'no-cache' });

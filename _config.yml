@@ -1,0 +1,21 @@
+# GitHub Pages uses Jekyll to build the site. We only want it to exclude
+# build-only files from the deploy — not to process anything else.
+exclude:
+  - .gitignore
+  - package.json
+  - package-lock.json
+  - README.md
+  - build-icons.js
+  - fetch-lexemes.js
+  - generate.js
+  - learned-lexemes.json
+  - user.json
+  - node_modules
+  - .env
+
+# Don't process Markdown/HTML through Liquid or convert anything — just
+# copy files into _site unchanged (minus the excludes above).
+markdown: null
+plugins: []
+include: []
+keep_files: []
