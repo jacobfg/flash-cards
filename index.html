@@ -35,27 +35,44 @@
     </section>
 
     <section id="deck" class="deck" hidden>
+      <div id="swipe-hint" class="swipe-hint">swipe to navigate</div>
       <div id="card" class="card" role="button" tabindex="0" aria-label="Tap to reveal translation">
         <div class="face front">
           <header class="card-header">
-            <button id="home-btn" aria-label="Back to menu">←</button>
-            <span id="counter">0 / 0</span>
+            <button class="home-btn" aria-label="Back to menu">←</button>
+            <span class="lang-flag" aria-label="Italian">🇮🇹</span>
           </header>
+          <div class="progress" aria-hidden="true"></div>
           <div class="hint" id="hint"></div>
           <div class="term" id="term">Loading…</div>
           <div class="sub" id="sub"></div>
+          <footer class="card-footer">
+            <button class="word-list" aria-label="Jump to word">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <button class="speak" aria-label="Speak Italian">🔊</button>
+          </footer>
         </div>
         <div class="face back">
           <header class="card-header">
-            <button id="home-btn-back" aria-label="Back to menu">←</button>
-            <span id="counter-back">0 / 0</span>
+            <button class="home-btn" aria-label="Back to menu">←</button>
+            <span class="lang-flag" aria-label="Italian">🇮🇹</span>
           </header>
+          <div class="progress" aria-hidden="true"></div>
           <div class="term" id="translation"></div>
           <div class="sub" id="sub-back"></div>
+          <footer class="card-footer">
+            <button class="word-list" aria-label="Jump to word">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </button>
+            <button class="speak" aria-label="Speak Italian">🔊</button>
+          </footer>
         </div>
       </div>
-      <button class="speak" id="speak" aria-label="Speak Italian">🔊</button>
-      <button class="word-list" id="word-list-btn" aria-label="Jump to word">☰</button>
 
       <div id="sheet" class="sheet" hidden>
         <div class="sheet-backdrop" id="sheet-backdrop"></div>
