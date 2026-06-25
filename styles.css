@@ -1,7 +1,7 @@
 :root {
   --bg: #ffffff;
   --card-bg: #ffffff;
-  --card-back: #fef9e7;
+  --card-back: #1CB0F6;
   --text: #1a1a2e;
   --muted: #6b6b80;
   --border: #e6e6ed;
@@ -131,6 +131,8 @@ body.revealed {
 .face.back .card-header button,
 .face.back .card-header .lang-flag {
   background: var(--card-back);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .card-header button {
@@ -242,7 +244,25 @@ body.revealed {
 
 .face.back {
   background: var(--card-back);
+  color: white;
   transform: rotateY(180deg);
+}
+
+.face.back .sub { color: rgba(255, 255, 255, 0.75); }
+.face.back .card-header button,
+.face.back .card-header .lang-flag,
+.face.back .card-footer .speak,
+.face.back .card-footer .word-list {
+  color: white;
+}
+.face.back .progress .dot {
+  background:
+    linear-gradient(to right, white calc(var(--fill) * 100%), transparent calc(var(--fill) * 100%)),
+    rgba(255, 255, 255, 0.25);
+}
+
+body.revealed .swipe-hint {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .card.flipped .front { transform: rotateY(-180deg); }
@@ -304,6 +324,8 @@ body.revealed {
 .face.back .card-footer .speak,
 .face.back .card-footer .word-list {
   background: var(--card-back);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
 .card-footer .speak {

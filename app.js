@@ -67,7 +67,7 @@ function dismissSwipeHint() {
 // iOS paints the safe-area strip above the web view with theme-color.
 // Match it to the visible face so the strip blends with the card.
 const FRONT_COLOR = '#ffffff';
-const BACK_COLOR = '#fef9e7';
+const BACK_COLOR = '#1CB0F6';
 function setThemeColor(color) {
   if (el.themeColor) el.themeColor.setAttribute('content', color);
 }
@@ -291,7 +291,9 @@ el.card.addEventListener('touchend', (e) => {
 });
 
 async function load() {
-  const res = await fetch('cards.json', { cache: 'no-cache' });
+  // No cache: directive — let the service worker decide. It does
+  // network-first, falling back to cache when offline.
+  const res = await fetch('cards.json');
   const data = await res.json();
   // Tolerate the older flat-array shape so existing installs don't break
   // before the SW updates.
@@ -301,6 +303,12 @@ async function load() {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+
+// Ask the browser to keep our cache through eviction. iOS may grant
+// silently for installed PWAs; on Safari tabs it usually returns false.
+if (navigator.storage?.persist) {
+  navigator.storage.persist().catch(() => {});
 }
 
 load();
