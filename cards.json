@@ -1,6 +1,42 @@
 {
   "cards": [
     {
+      "it": "lui",
+      "en": "he",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/e611bb31dc979b3dd016bddcda23f117",
+      "pron": "LOO-ee"
+    },
+    {
+      "it": "allegro",
+      "en": "happy, bright, upbeat, sunny, liveliest, festive, cheerful, funnest",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/7736ce11980f3b9e35f3e9c02bedd703",
+      "pron": "ahl-LEH-groh"
+    },
+    {
+      "it": "serio",
+      "en": "serious, worse, earnest",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/f6152922d29a8d82b3de8c5a76782bd4",
+      "pron": "SEH-ryoh"
+    },
+    {
+      "it": "è",
+      "en": "is, he’s, it's, she is, it is, she's, you are, that's, is it, dinner's, 's, it’s, he's, is that, did, be, she’s, are, bound, pizza's, he is, that’s",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/ea83495d6d27ce58642274e3e3675c37",
+      "pron": "EH"
+    },
+    {
+      "it": "simpatico",
+      "en": "nice, pleasant, likeable, endearing, friendly",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/59c9ecf4f8ae724ff5d05b978cf96c25",
+      "pron": "seem-PAH-tee-koh"
+    },
+    {
+      "it": "timido",
+      "en": "shy",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/11647a721c3cdd527beaa59282543f26",
+      "pron": "TEE-mee-doh"
+    },
+    {
       "it": "e tu",
       "en": "and you, you, what about you",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/826d15c24039f3331bd5528eb4cd3613",
