@@ -1,6 +1,42 @@
 {
   "cards": [
     {
+      "it": "lei",
+      "en": "she",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/305bc2147e0041aaf1e8b3dc55ef558b",
+      "pron": "lay"
+    },
+    {
+      "it": "seria",
+      "en": "serious",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/7ea99d523b960cea82a09e77393f5597",
+      "pron": "SEH-ryah"
+    },
+    {
+      "it": "allegra",
+      "en": "cheerful, happy",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/eb7e79834e0cf81b221ad02fbde39b38",
+      "pron": "ah-LEH-grah"
+    },
+    {
+      "it": "allora",
+      "en": "then, from then on, at that time, ever since, since, well, since then, at that moment, at the time, so",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/b59e0615ed8714c7aaf4f4f14c0ad40a",
+      "pron": "ah-LOH-rah"
+    },
+    {
+      "it": "simpatica",
+      "en": "nice, pleasant, likable, friendly",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/6e66f66dc9f5c4ce66729e58895acc43",
+      "pron": "seem-PAH-tee-kah"
+    },
+    {
+      "it": "timida",
+      "en": "shy",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/874ba5f8fa6a970feff88691e98192ea",
+      "pron": "TEE-mee-dah"
+    },
+    {
       "it": "lui",
       "en": "he",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/e611bb31dc979b3dd016bddcda23f117",
