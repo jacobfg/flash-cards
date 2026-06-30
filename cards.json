@@ -1,6 +1,30 @@
 {
   "cards": [
     {
+      "it": "cinese",
+      "en": "Chinese",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/b6c6ea88dd45239fe6db02b1df36ba27",
+      "pron": "chee-NEH-zeh"
+    },
+    {
+      "it": "italiano",
+      "en": "Italian, italians",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/4ea9fd0dbd7b4dc6bc190c0592626857",
+      "pron": "ee-tah-LYAH-no"
+    },
+    {
+      "it": "studio",
+      "en": "work, I study, studied, I examine, study, worked, studying, lawyer's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/7a334a464bb1e032694149fdfd36820c",
+      "pron": "STOO-dyo"
+    },
+    {
+      "it": "con",
+      "en": "with, to, featuring",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/f0c87e137768efbe64c6e619f186a7fe",
+      "pron": "kon"
+    },
+    {
       "it": "panificio",
       "en": "bakery, baker's",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/99e085934c518ee176a6c87f09939e50",
