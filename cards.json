@@ -1,6 +1,102 @@
 {
   "cards": [
     {
+      "it": "panificio",
+      "en": "bakery, baker's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/99e085934c518ee176a6c87f09939e50",
+      "pron": "pah-nee-FEE-choh"
+    },
+    {
+      "it": "gelateria",
+      "en": "ice-cream shop, ice cream parlor, parlor",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/15dd89a2f2b4f3509eac91eee24fb9b0",
+      "pron": "jeh-lah-teh-REE-ah"
+    },
+    {
+      "it": "hotel",
+      "en": "hotel, albergo, hotels",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/5aed25fc2fa1f2d842bc3a4f98978e14",
+      "pron": "oh-TEL"
+    },
+    {
+      "it": "ristorante",
+      "en": "diners, diner, restaurants, restaurant, ristorante",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/5eacdc52892a8f2bf7b0e9afd7d53973",
+      "pron": "ree-stoh-RAHN-teh"
+    },
+    {
+      "it": "piazza",
+      "en": "plaza, public square, squares, square, place, station, piazza",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/6481c85fec70849c00bce7f0fad02411",
+      "pron": "PYAHT-tsah"
+    },
+    {
+      "it": "farmacia",
+      "en": "drugstore, pharmacy, pharmacy's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/9ea6a6aa54970726f48abacacced946b",
+      "pron": "far-mah-CHEE-ah"
+    },
+    {
+      "it": "negozio",
+      "en": "shop, stores, store's, store, shop's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/0b81d5245923b1d995eea508cbb86b85",
+      "pron": "neh-GOH-tsyoh"
+    },
+    {
+      "it": "museo",
+      "en": "museums, museum, museum's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/d5edb4f233e8e34e51e3c711d1906de5",
+      "pron": "moo-ZEH-oh"
+    },
+    {
+      "it": "lì",
+      "en": "there",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/216ae7a05bc2a7fef4c1301354e5b0ab",
+      "pron": "LEE"
+    },
+    {
+      "it": "biblioteca",
+      "en": "library",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/9d4cf85184d22c0e683994baba93e62c",
+      "pron": "bee-blee-oh-TEH-kah"
+    },
+    {
+      "it": "banca",
+      "en": "bank, bank's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/e0cd2d5861cc23527626a20cb47f231f",
+      "pron": "BAHN-kah"
+    },
+    {
+      "it": "scuola",
+      "en": "school",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/abf90b84ca4ca3a7981e84849ede2f1a",
+      "pron": "SKWOH-lah"
+    },
+    {
+      "it": "c'è",
+      "en": "there is, there’s, there was",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/0c74beceb4e0bb016392f286b8379877",
+      "pron": "CHEH"
+    },
+    {
+      "it": "qui",
+      "en": "here",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/4879afbc1886b4074289373ab8b24ef0",
+      "pron": "KWEE"
+    },
+    {
+      "it": "teatro",
+      "en": "theater, theatre, venue's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/34bee73ce0a9ebf9abbcba89be5fc0dc",
+      "pron": "teh-AH-troh"
+    },
+    {
+      "it": "parco",
+      "en": "economical, park, parco, fleet, sparing, park's",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/698fb9335d6cfffe3fa9c1dcbde07e0c",
+      "pron": "PAR-koh"
+    },
+    {
       "it": "lei",
       "en": "she",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/305bc2147e0041aaf1e8b3dc55ef558b",
