@@ -1,6 +1,78 @@
 {
   "cards": [
     {
+      "it": "arte",
+      "en": "art",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/8b284384e5c4c8cc8b0bf235c7420fc6",
+      "pron": "AR-teh"
+    },
+    {
+      "it": "studi",
+      "en": "she studies, studied, survey, he studies, study, you study, practice, do you study, research, office, you examine, studying",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/a13e52e7999df2670044cf2f8ff03525",
+      "pron": "STOO-dee"
+    },
+    {
+      "it": "musica",
+      "en": "music",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/33f1220a5864e630dff2e95063d9526d",
+      "pron": "MOO-zee-kah"
+    },
+    {
+      "it": "in",
+      "en": "at, to the, to, in, for, of us, into, going, on, by, at the",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/7fa5b7fe427b9ede25d18179ae29c0df",
+      "pron": "een"
+    },
+    {
+      "it": "tedesco",
+      "en": "German",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/27d70f5ffd1ba5da5387f7c377e514d7",
+      "pron": "teh-DES-ko"
+    },
+    {
+      "it": "wow",
+      "en": "wow",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/be24ddc5175f1a10924e2eca3c5b4807",
+      "pron": "wow"
+    },
+    {
+      "it": "parli",
+      "en": "you speak, speak, you talk, talk, do you speak, you are talking, you are speaking",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/4cf8a5c2b4115895ede2fc6467af1f01",
+      "pron": "PAR-lee"
+    },
+    {
+      "it": "spagnolo",
+      "en": "Spanish",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/fa52dba87ce93b9af8920e95b7c9329d",
+      "pron": "spahn-YOH-lo"
+    },
+    {
+      "it": "inglese",
+      "en": "English",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/276736c2411f63a3f027c7e52941b58d",
+      "pron": "een-GLEH-zeh"
+    },
+    {
+      "it": "francese",
+      "en": "French",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/d9e8628225e196f34c3a09b023eb430e",
+      "pron": "frahn-CHEH-zeh"
+    },
+    {
+      "it": "parlo",
+      "en": "speak, I speak, I am speaking, I talk, I am talking, talk",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/5021085787aa8830a288ba9f3d6aa5bf",
+      "pron": "PAR-lo"
+    },
+    {
+      "it": "fantastico",
+      "en": "fantastic",
+      "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/1fe61b7307f808a20c790c14236e85de",
+      "pron": "fahn-TAH-stee-ko"
+    },
+    {
       "it": "cinese",
       "en": "Chinese",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/b6c6ea88dd45239fe6db02b1df36ba27",
@@ -8,7 +80,7 @@
     },
     {
       "it": "italiano",
-      "en": "Italian, italians",
+      "en": "Italian",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/4ea9fd0dbd7b4dc6bc190c0592626857",
       "pron": "ee-tah-LYAH-no"
     },
@@ -44,7 +116,7 @@
     },
     {
       "it": "ristorante",
-      "en": "diners, diner, restaurants, restaurant, ristorante",
+      "en": "diner, restaurant",
       "audioURL": "https://d1vq87e9lcf771.cloudfront.net/anita/5eacdc52892a8f2bf7b0e9afd7d53973",
       "pron": "ree-stoh-RAHN-teh"
     },
